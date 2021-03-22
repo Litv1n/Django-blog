@@ -1,0 +1,22 @@
+{% extends 'blog/main.html' %}        
+        {% block content %}
+        <div class="form-section">
+
+                <img src="{{ user.profile.avatar.url }}" alt="">
+                <h2>Login: {{ user.username }}</h2>
+                <span style="color: rgba(0,0,0,0.6);
+                text-shadow: 2px 8px 6px rgba(0,0,0,0.2),
+                                0px -5px 35px rgba(255,255,255,0.3);
+                font-size: 20px;"
+                >E-mail: {{ user.email }}</span>
+                <h2>Edit data</h2>
+                <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ update_form }}
+                        {{ avatar_form }}
+                <button type="submit">
+                        Edit
+                </button>
+                </form>
+        </div>
+        {% endblock %}

@@ -1,0 +1,7 @@
+{% extends 'blog/main.html' %}        
+        {% block content %}
+            <div class="form-section">
+                <h2>You have successfully logged out</h2>
+                <a href="{% url 'login' %}">Enter again</a>
+            </div>
+        {% endblock %}
