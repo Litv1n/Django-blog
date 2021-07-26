@@ -26,3 +26,9 @@ class ProfileAvatar(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['avatar']
+
+class ProfileDoc(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = ['user_file']

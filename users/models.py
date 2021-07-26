@@ -7,6 +7,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(
         'Avatar', default='avatar.jpeg', upload_to='avatars/')
+    user_file = models.FileField(upload_to='files/', default='Курсовая работа (заочная форма).doc')
 
     def __str__(self):
         return f'{self.user.username}'

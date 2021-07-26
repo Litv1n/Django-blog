@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import OurRegistration, UserUpdateForm, ProfileAvatar
+from .forms import OurRegistration, UserUpdateForm, ProfileAvatar, ProfileDoc
 
 
 def register(request):
@@ -24,10 +24,13 @@ def profile(request):
         avatar_form = ProfileAvatar(
             request.POST, request.FILES, instance=request.user.profile)
         update_form = UserUpdateForm(request.POST, instance=request.user)
+        doc_form = ProfileDoc(
+            request.POST, request.FILES, instance=request.user.profile)
 
-        if update_form.is_valid() and avatar_form.is_valid():
+        if update_form.is_valid() and avatar_form.is_valid() and doc_form.is_valid():
             avatar_form.save()
             update_form.save()
+            doc_form.save()
 
         messages.success(
             request, f'User data update!')
@@ -35,5 +38,7 @@ def profile(request):
     else:
         avatar_form = ProfileAvatar(instance=request.user.profile)
         update_form = UserUpdateForm(instance=request.user)
+        doc_form = ProfileDoc(instance=request.user.profile)
 
-    return render(request, 'users/profile.html', {'avatar_form': avatar_form, 'update_form': update_form})
+    return render(request, 'users/profile.html', {'avatar_form': avatar_form, 'update_form': update_form,
+                                                  'doc_form': doc_form})
